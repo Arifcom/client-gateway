@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-gateway
+  template:
+    metadata:
+      labels:
+        app: client-gateway
+    spec:
+      containers:
+      - name: client-gateway
+        image: gcr.io/recqa-proficeo-dev/client-gateway@sha256:5e1a3bd8e98d9a2fb346340f380cb2e4839f8c2efcfa6e8b86b23a6423792b71
+        ports:
+        - containerPort: 3000
+        env:
+          - name: PORT
+            value: "3000"
+          - name: USER_SERVICE_HOST
+            value: 10.94.2.147
+          - name: USER_SERVICE_PORT
+            value: '7777'

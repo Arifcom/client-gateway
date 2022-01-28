@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gateway
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: recqa-testing-client-gateway-ip
+    networking.gke.io/managed-certificates: testingrecqa
+    kubernetes.io/ingress.class: "gce"
+  labels:
+    app: gateway
+spec:
+  rules:
+  - host: client-gateway.testing.recqa.com
+    http:
+      paths:
+      - backend:
+          serviceName: client-gateway
+          servicePort: 80

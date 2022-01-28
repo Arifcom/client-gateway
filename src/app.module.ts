@@ -9,7 +9,10 @@ import { Module } from '@nestjs/common';
       {
         name: 'USER',
         transport: Transport.TCP,
-        options: { port: 3001 },
+        options: {
+          host: process.env.USER_SERVICE_HOST,
+          port: parseInt(process.env.USER_SERVICE_PORT),
+        },
       },
     ]),
   ],
